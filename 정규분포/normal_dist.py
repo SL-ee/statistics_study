@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.special import erf
+import scipy as sp
+import scipy.stats
 
 np.random.seed(0)
 
@@ -12,7 +13,7 @@ plt.rcParams['lines.linewidth'] = 5
 
 # 평균
 mean = 20.0
-# 표준편차
+# 
 deviation = 5.0
 
 x = np.linspace(0, 40, 1500)
@@ -23,4 +24,10 @@ plt.xlabel('x')
 plt.ylabel('f(x)')
 # 범례 위치
 plt.legend(loc="upper left")
+
+# x1과 x2 사이에 있을 확률
+rv = sp.stats.norm(mean, deviation)
+x1, x2 = 15, 27
+print(f"Prob ({x1} < x < {x2}) = ", rv.cdf(x2) - rv.cdf(x1))
+
 plt.show()
